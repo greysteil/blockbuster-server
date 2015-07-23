@@ -14,6 +14,12 @@ import bb_auditlogger as audit
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
+app.config.from_object('blockbuster.default_settings')
+
+try:
+    app.config.from_envvar('BLOCKBUSTER_SETTINGS')
+except Exception, e:
+    logger.debug(e)
 
 
 def startup():
